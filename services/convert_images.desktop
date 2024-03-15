@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=image/*;
+Actions=convertJPG;convertPNG;convertWEBP;
+X-KDE-Submenu=Convert image
+X-KDE-Submenu[pt]=Converter imagem
+
+[Desktop Action convertJPG]
+Name=Convert to JPEG
+Name[pt]=Converter para JPEG
+Icon=photo
+Exec=convert %U %F.jpg
+
+[Desktop Action convertPNG]
+Name=Convert to PNG
+Name[pt]=Converter para PNG
+Icon=photo
+Exec=convert %U %U.png
+
+[Desktop Action convertWEBP]
+Name=Convert to WEBP
+Name[pt]=Converter para WEBP
+Icon=photo
+Exec=convert %U %U.webp

@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Copyright (c) cyberyurei2000 2024
+# Released under the BSD 3-Clause License
+# https://opensource.org/license/bsd-3-clause
+
+URL=$1
+VIDEODIR=$(xdg-user-dir VIDEOS)
+LASTDIR=$(pwd)
+DATE=$(date +"%Y%m%d_%H%M%S")
+declare -i COUNTER=0
+
+if command -v mpv > /dev/null; then
+    cd $VIDEODIR
+    mkdir -p VCR && cd VCR
+
+    if [[ -f stream.mkv ]]; then
+        COUNTER+=1
+        while [ -f stream${COUNTER}.mkv ]; do
+            COUNTER+=1
+        done
+    fi
+
+    if [ $COUNTER -gt 0 ]; then
+        mpv --no-resume-playback --stream-record=stream${COUNTER}.mkv $URL
+    else
+        mpv --no-resume-playback --stream-record=stream.mkv $URL
+    fi
+
+    if [ -e ./stream.mkv ] || [ -e ./stream${COUNTER}.mkv ]; then
+        printf "vcr: save the stream name as: "
+        read NAME
+        if [ $COUNTER -gt 0 ]; then
+            if [ $NAME != "" ]; then
+                mv stream${COUNTER}.mkv ${NAME}_${DATE}.mkv
+            fi
+        else
+            if [ $NAME != "" ]; then
+                mv stream.mkv ${NAME}_${DATE}.mkv
+            fi
+        fi
+    fi
+    cd $LASTDIR
+else
+    print "ERROR: mpv not installed! This command only works with mpv."
+fi
