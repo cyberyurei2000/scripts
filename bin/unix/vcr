@@ -42,5 +42,5 @@ if command -v mpv > /dev/null; then
     fi
     cd $LASTDIR
 else
-    print "ERROR: mpv not installed! This command only works with mpv."
+    printf "ERROR: mpv not installed! This command only works with mpv."
 fi
