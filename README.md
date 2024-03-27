@@ -25,7 +25,7 @@ $ vcr "http://stream.url/main.m3u8"
 
 ### convert_images
 
-Quickly convert image files into jpeg, png or webp.
+Quickly convert image files into jpeg, png, webp or jxl.
 
 #### Dependecies:
 
@@ -33,13 +33,23 @@ Quickly convert image files into jpeg, png or webp.
 
 ## Setup
 
+### Quick Setup
+
+#### Linux
+
+```
+$ ./install.sh
+```
+
+### Manual Setup
+
 #### Linux
 
 Scripts should be placed in the **~/.local/bin** directory.
 
 Dolphin services should be placed in the following directories:
 
--  **Plasma 6:** ~/.local/share/kio/servicemenus
+- **Plasma 6:** ~/.local/share/kio/servicemenus
 
 - **Plasma 5:** ~/.local/share/kservices5/ServiceMenus
 
