@@ -6,6 +6,8 @@ This repo contains scripts and KDE Dolphin services made by me.
 
 ### vcr
 
+![screenshot](./docs/screenshot_vcr.png)
+
 Play a video stream in mpv while recording automatically.
 
 #### How to use?
