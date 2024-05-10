@@ -18,6 +18,11 @@ Simply type the url of the video stream after the command.
 $ vcr "http://stream.url/main.m3u8"
 ```
 
+It'll then start recording while playing back the stream, saving it in the VCR directory in the videos directory of your OS.
+
+- On Linux it will be saved to: /home/$USER/Videos
+- On Windows it will be saved to: C:\\Users\\$USER\Videos
+
 #### Dependecies:
 
 - mpv
@@ -43,6 +48,10 @@ Quickly convert image files into jpeg, png, webp or jxl.
 $ ./install.sh
 ```
 
+#### Windows
+
+#TODO
+
 ### Manual Setup
 
 #### Linux
@@ -54,6 +63,10 @@ Dolphin services should be placed in the following directories:
 - **Plasma 6:** ~/.local/share/kio/servicemenus
 
 - **Plasma 5:** ~/.local/share/kservices5/ServiceMenus
+
+#### Windows
+
+#TODO
 
 ## License
 
