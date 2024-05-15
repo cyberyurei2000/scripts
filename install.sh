@@ -6,7 +6,7 @@
 
 DIR=$(pwd)
 
-if [ "$XDG_DATA_HOME" = "" ]; then
+if [ "$XDG_DATA_HOME" == "" ]; then
     XDG_DATA_HOME="$HOME/.local/share"
 fi
 
