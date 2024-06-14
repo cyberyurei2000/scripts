@@ -14,7 +14,7 @@ if command -v mpv > /dev/null; then
     cd $VIDEODIR
     mkdir -p VCR && cd VCR
 
-    if [[ -f stream.mkv ]]; then
+    if [ -f stream.mkv ]; then
         COUNTER+=1
         while [ -f stream${COUNTER}.mkv ]; do
             COUNTER+=1
