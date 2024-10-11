@@ -28,15 +28,21 @@ if command -v mpv > /dev/null; then
     fi
 
     if [ -f ./stream.mkv ] || [ -f ./stream${COUNTER}.mkv ]; then
-        printf "vcr: save the stream name as: "
-        read NAME
-        if [ $COUNTER -gt 0 ]; then
-            if [ $NAME != "" ]; then
-                mv stream${COUNTER}.mkv ${NAME}_${DATE}.mkv
-            fi
-        else
-            if [ $NAME != "" ]; then
-                mv stream.mkv ${NAME}_${DATE}.mkv
+        if [ -s ./stream.mkv ] || [ -s ./stream${COUNTER}.mkv ]; then
+            printf "vcr: save the stream name as: "
+            read NAME
+            if [ $COUNTER -gt 0 ]; then
+                if [ $NAME != "" ]; then
+                    mv stream${COUNTER}.mkv ${NAME}_${DATE}.mkv
+                else
+                    mv stream${COUNTER}.mkv stream${COUNTER}_${DATE}.mkv
+                fi
+            else
+                if [ $NAME != "" ]; then
+                    mv stream.mkv ${NAME}_${DATE}.mkv
+                else
+                    mv stream.mkv stream_${DATE}.mkv
+                fi
             fi
         fi
     fi

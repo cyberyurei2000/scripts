@@ -27,14 +27,20 @@ if(Get-Command mpv -ErrorAction SilentlyContinue) {
     }
 
     if(Test-Path -Path ".\stream.mkv" || Test-Path -Path ".\stream${Counter}.mkv") {
-        $Name = Read-Host "vcr: save stream name as: "
-        if($Counter -gt 0) {
-            if($Name -ne "") {
-                Rename-Item -Path ".\stream${Counter}.mkv" -NewName "${Name}_${Date}.mkv"
-            }
-        } else {
-            if($Name -ne "") {
-                Rename-Item -Path ".\stream.mkv" -NewName "${Name}_${Date}.mkv"
+        if((Get-Item -Path ".\stream.mkv").length -ne 0 || (Get-Item -Path ".\stream${Counter}.mkv").length -ne 0) {
+            $Name = Read-Host "vcr: save stream name as: "
+            if($Counter -gt 0) {
+                if($Name -ne "") {
+                    Rename-Item -Path ".\stream${Counter}.mkv" -NewName "${Name}_${Date}.mkv"
+                } else {
+                    Rename-Item -Path ".\stream${Counter}.mkv" -NewName "stream${Counter}_${Date}.mkv"
+                }
+            } else {
+                if($Name -ne "") {
+                    Rename-Item -Path ".\stream.mkv" -NewName "${Name}_${Date}.mkv"
+                } else {
+                    Rename-Item -Path ".\stream.mkv" -NewName "stream_${Date}.mkv"
+                }
             }
         }
     }
