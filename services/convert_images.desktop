@@ -2,27 +2,27 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
 MimeType=image/*;
-Actions=convert_jpeg;convert_png;convert_webp;convert_jxl;
+Actions=convertJPEG;convertPNG;convertWEBP;convertJXL;
 X-KDE-Submenu=Convert to...
 X-KDE-Submenu[pt]=Converter para...
 X-KDE-Submenu[es]=Convertir a...
 
-[Desktop Action convert_jpeg]
+[Desktop Action convertJPEG]
 Name=.jpg
 Icon=image-jpeg
 Exec=filename=%f; convert %f "${filename%.*}.jpg"
 
-[Desktop Action convert_png]
+[Desktop Action convertPNG]
 Name=.png
 Icon=image-png
 Exec=filename=%f; convert %f "${filename%.*}.png"
 
-[Desktop Action convert_webp]
+[Desktop Action convertWEBP]
 Name=.webp
 Icon=image-webp
 Exec=filename=%f; convert %f "${filename%.*}.webp"
 
-[Desktop Action convert_jxl]
+[Desktop Action convertJXL]
 Name=.jxl
 Icon=image-jxl
 Exec=filename=%f; convert %f "${filename%.*}.jxl"

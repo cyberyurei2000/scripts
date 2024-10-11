@@ -32,11 +32,11 @@ It'll then start recording while playing back the stream, saving it in the VCR d
 
 ### convert_images
 
-Quickly convert image files into jpeg, png, webp or jxl.
+Quickly convert image files into jpeg, png, webp or jxl using imagemagick.
 
-#### Dependecies:
+<!--### open_code
 
-- imagemagick
+Open files or directories in Visual Studio Code, works the same way as the "Open with Code" menu in Windows File Explorer, using the same text and translations-->
 
 ## Setup
 

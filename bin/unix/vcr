@@ -27,7 +27,7 @@ if command -v mpv > /dev/null; then
         mpv --no-resume-playback --stream-record=stream.mkv $URL
     fi
 
-    if [ -e ./stream.mkv ] || [ -e ./stream${COUNTER}.mkv ]; then
+    if [ -f ./stream.mkv ] || [ -f ./stream${COUNTER}.mkv ]; then
         printf "vcr: save the stream name as: "
         read NAME
         if [ $COUNTER -gt 0 ]; then
