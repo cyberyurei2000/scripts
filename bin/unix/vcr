@@ -5,6 +5,7 @@
 # https://opensource.org/license/bsd-3-clause
 
 URL=$1
+USERAGENT=$2
 VIDEODIR=$(xdg-user-dir VIDEOS)
 LASTDIR=$(pwd)
 DATE=$(date +"%Y%m%d_%H%M%S")
@@ -21,29 +22,29 @@ if command -v mpv > /dev/null; then
         done
     fi
 
-    if [ $COUNTER -gt 0 ]; then
-        mpv --no-resume-playback --stream-record=stream${COUNTER}.mkv $URL
+    if [ ! -z "${USERAGENT}" ]; then
+        ARGS="--user-agent=$USERAGENT"
     else
-        mpv --no-resume-playback --stream-record=stream.mkv $URL
+        ARGS=""
     fi
 
-    if [ -f ./stream.mkv ] || [ -f ./stream${COUNTER}.mkv ]; then
-        if [ -s ./stream.mkv ] || [ -s ./stream${COUNTER}.mkv ]; then
+    if [ $COUNTER -gt 0 ]; then
+        TEMPFILE="stream${COUNTER}.mkv"
+    else
+        TEMPFILE="stream.mkv"
+    fi
+    mpv $ARGS --no-resume-playback --stream-record=${TEMPFILE} $URL
+
+    if [ -f $TEMPFILE ]; then
+        if [ -s $TEMPFILE ]; then
             printf "vcr: save the stream name as: "
             read NAME
-            if [ $COUNTER -gt 0 ]; then
-                if [ $NAME != "" ]; then
-                    mv stream${COUNTER}.mkv ${NAME}_${DATE}.mkv
-                else
-                    mv stream${COUNTER}.mkv stream${COUNTER}_${DATE}.mkv
-                fi
+            if [ ! -z "${NAME}" ]; then
+                FINALFILE="${NAME}_${DATE}.mkv"
             else
-                if [ $NAME != "" ]; then
-                    mv stream.mkv ${NAME}_${DATE}.mkv
-                else
-                    mv stream.mkv stream_${DATE}.mkv
-                fi
+                FINALFILE="stream_${DATE}.mkv"
             fi
+            mv $TEMPFILE $FINALFILE
         fi
     fi
     cd $LASTDIR

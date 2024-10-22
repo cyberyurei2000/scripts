@@ -23,6 +23,12 @@ It'll then start recording while playing back the stream, saving it in the VCR d
 - On Linux it will be saved to: /home/$USER/Videos
 - On Windows it will be saved to: C:\\Users\\$USER\Videos
 
+If you need to add a user agent, place it after the url.
+
+```
+$ vcr "http://stream.url/main.m3u8" "YOUR USER AGENT HERE"
+```
+
 #### Dependecies:
 
 - mpv

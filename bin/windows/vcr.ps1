@@ -3,6 +3,7 @@
 # https://opensource.org/license/bsd-3-clause
 
 $Url = $Args[0]
+$UserAgent = $Args[1]
 $VideoDir = "$HOME\Videos"
 $LastDir = $(Get-Location)
 $Date = $(Get-Date -Format "yyyyMMdd_HHmm")
@@ -20,30 +21,31 @@ if(Get-Command mpv -ErrorAction SilentlyContinue) {
         }
     }
 
-    if($Counter -gt 0) {
-        mpv --no-resume-playback --stream-record=stream${COUNTER}.mkv $URL
+    if($UserAgent -ne "") {
+        $Args_ = "--user-agent=$UserAgent"
     } else {
-        mpv --no-resume-playback --stream-record=stream.mkv $URL
+        $Args_ = ""
     }
 
-    if(Test-Path -Path ".\stream.mkv" || Test-Path -Path ".\stream${Counter}.mkv") {
-        if((Get-Item -Path ".\stream.mkv").length -ne 0 || (Get-Item -Path ".\stream${Counter}.mkv").length -ne 0) {
+    if($Counter -gt 0) {
+        $TempFile = "stream${Counter}.mkv"
+    } else {
+        $TempFile = "stream.mkv"
+    }
+    mpv $Args_ --no-resume-playback --stream-record=$TempFile $URL
+
+    if(Test-Path -Path ".\${TempFile}") {
+        if((Get-Item -Path ".\${TempFile}").length -ne 0) {
             $Name = Read-Host "vcr: save stream name as: "
-            if($Counter -gt 0) {
-                if($Name -ne "") {
-                    Rename-Item -Path ".\stream${Counter}.mkv" -NewName "${Name}_${Date}.mkv"
-                } else {
-                    Rename-Item -Path ".\stream${Counter}.mkv" -NewName "stream${Counter}_${Date}.mkv"
-                }
+            if($Name -ne "") {
+                $FinalFile = "${Name}_${Date}.mkv"
             } else {
-                if($Name -ne "") {
-                    Rename-Item -Path ".\stream.mkv" -NewName "${Name}_${Date}.mkv"
-                } else {
-                    Rename-Item -Path ".\stream.mkv" -NewName "stream_${Date}.mkv"
-                }
+                $FinalFile = "stream_${Date}.mkv"
             }
+            Rename-Item -Path ".\${TempFile}" -NewName "${FinalFile}"
         }
     }
+
     Set-Location -Path $LastDir
 } else {
     Write-Output "ERROR: mpv is necessary for executing this script"
