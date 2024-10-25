@@ -6,12 +6,13 @@ $Url = $Args[0]
 $UserAgent = $Args[1]
 $VideoDir = "$HOME\Videos"
 $LastDir = $(Get-Location)
-$Date = $(Get-Date -Format "yyyyMMdd_HHmm")
+$Date = $(Get-Date -Format "yyyyMMdd_HHmmss")
 $Counter = 0
 
 if(Get-Command mpv -ErrorAction SilentlyContinue) {
-    Set-Location -Path $VideoDir
-    New-Item -Path ".\" -Name "VCR" -ItemType "Directory" -Force
+    if(-Not(Test-Path -Path "${VideoDir}\VCR")) {
+        New-Item -Path $VideoDir -Name "VCR" -ItemType "Directory"
+    }
     Set-Location -Path "$VideoDir\VCR"
 
     if(Test-Path -Path ".\stream.mkv") {

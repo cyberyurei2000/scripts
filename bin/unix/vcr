@@ -12,8 +12,10 @@ DATE=$(date +"%Y%m%d_%H%M%S")
 declare -i COUNTER=0
 
 if command -v mpv > /dev/null; then
-    cd $VIDEODIR
-    mkdir -p VCR && cd VCR
+    if [ ! -d "${VIDEODIR}/VCR" ]; then
+        mkdir -p "${VIDEODIR}/VCR"
+    fi
+    cd "${VIDEODIR}/VCR"
 
     if [ -f stream.mkv ]; then
         COUNTER+=1
